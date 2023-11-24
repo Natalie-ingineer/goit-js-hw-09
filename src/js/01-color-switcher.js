@@ -2,7 +2,6 @@ const startBtn = document.querySelector('button[data-start]');
 const stopBtn = document.querySelector('button[data-stop]');
 const body = document.querySelector('body');
 let colorChangeInterval;
-// const randomColor = getRandomHexColor();
 
 startBtn.addEventListener('click', () => {
   colorChangeInterval = setInterval(() => {
