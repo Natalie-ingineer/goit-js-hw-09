@@ -6,9 +6,9 @@ const startBtn = document.querySelector('button');
 const timerDiv = document.querySelector('.timer');
 
 timerDiv.style.display = 'flex';
-timerDiv.style.flexWrap = 'wrap';
+timerDiv.style.fontSize = '20px';
 timerDiv.style.gap = '10px';
-// timerDiv.style.display = 'flex';
+timerDiv.style.color = 'teal';
 
 // let timerId = null;
 // let targetDate = null;
