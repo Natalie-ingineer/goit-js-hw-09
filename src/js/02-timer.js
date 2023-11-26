@@ -107,7 +107,7 @@ function targetDateTimer() {
 
   if (selectedDate > new Date()) {
     let delta = selectedDate - new Date();
-    timerInterval = setInterval(() => {
+    let timerInterval = setInterval(() => {
       const timeRemaining = convertMs(delta);
 
       days.textContent = addLeadingZero(timeRemaining.days);
