@@ -3,6 +3,12 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 const input = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('button');
+const timerDiv = document.querySelector('.timer');
+
+timerDiv.style.display = 'flex';
+timerDiv.style.flexWrap = 'wrap';
+timerDiv.style.gap = '10px';
+// timerDiv.style.display = 'flex';
 
 // let timerId = null;
 // let targetDate = null;
@@ -48,11 +54,6 @@ function convertMs(ms) {
 function addLeadingZero(value) {
   return value.toString().padStart(2, '0');
 }
-
-// const millisecondsInSecond = 1000;
-// const secondsInMinutes = 60;
-// const minutesInHour = 60;
-// const hoursInDay = 24;
 
 function targetDateTimer() {
   const selectedDate = flatpickr('#datetime-picker').selectedDates[0];
@@ -112,64 +113,3 @@ function targetDateTimer() {
 // const renderTimer = string => {
 //   document.querySelector('span').innerText = string;
 // }
-
-// timer(new Date('2024/06/03'));
-
-// const options = {
-//   enableTime: true,
-//   time_24hr: true,
-//   defaultDate: new Date(),
-//   minuteIncrement: 1,
-//   onClose(selectedDates) {
-//     const selectedDate = selectedDates[0];
-//     const currentDate = new Date();
-
-//     if (selectedDate <= currentDate) {
-//       alert('Please choose a date in the future');
-//       document.querySelector('[data-start]').disabled = true;
-//     } else {
-//       document.querySelector('[data-start]').disabled = false;
-//     }
-//   },
-// };
-
-// flatpickr('#datetime-picker', options);
-
-// function addLeadingZero(value) {
-//   return value.toString().padStart(2, '0');
-// }
-
-// let timerInterval;
-
-// document.querySelector('[data-start]').addEventListener('click', () => {
-//   const selectedDate = flatpickr('#datetime-picker').selectedDates[0];
-//   const currentDate = new Date();
-
-//   if (selectedDate > currentDate) {
-//     const timeDifference = selectedDate.getTime() - currentDate.getTime();
-
-//     timerInterval = setInterval(() => {
-//       const timeRemaining = convertMs(timeDifference);
-
-//       document.querySelector('[data-days]').textContent = addLeadingZero(
-//         timeRemaining.days
-//       );
-//       document.querySelector('[data-hours]').textContent = addLeadingZero(
-//         timeRemaining.hours
-//       );
-//       document.querySelector('[data-minutes]').textContent = addLeadingZero(
-//         timeRemaining.minutes
-//       );
-//       document.querySelector('[data-seconds]').textContent = addLeadingZero(
-//         timeRemaining.seconds
-//       );
-
-//       if (timeDifference <= 0) {
-//         clearInterval(timerInterval);
-//         document.querySelector('[data-start]').disabled = true;
-//       } else {
-//         timeDifference -= 1000; // віднімання 1 секунди
-//       }
-//     }, 1000);
-//   }
-// });
