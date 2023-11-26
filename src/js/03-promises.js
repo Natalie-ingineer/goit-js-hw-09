@@ -51,26 +51,6 @@ Notiflix.Notify.init({
     fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
     backOverlayColor: 'rgba(255,85,73,0.2)',
   },
-
-  warning: {
-    background: '#eebf31',
-    textColor: '#fff',
-    childClassName: 'notiflix-notify-warning',
-    notiflixIconColor: 'rgba(0,0,0,0.2)',
-    fontAwesomeClassName: 'fas fa-exclamation-circle',
-    fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
-    backOverlayColor: 'rgba(238,191,49,0.2)',
-  },
-
-  info: {
-    background: '#26c0d3',
-    textColor: '#fff',
-    childClassName: 'notiflix-notify-info',
-    notiflixIconColor: 'rgba(0,0,0,0.2)',
-    fontAwesomeClassName: 'fas fa-info-circle',
-    fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
-    backOverlayColor: 'rgba(38,192,211,0.2)',
-  },
 });
 
 const form = document.querySelector('.form');

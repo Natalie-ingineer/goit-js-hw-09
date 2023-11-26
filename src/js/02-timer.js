@@ -1,6 +1,51 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
+import Notiflix from 'notiflix';
+
+import Notiflix from 'notiflix/dist/notiflix-aio-3.2.6.min.js';
+
+Notiflix.Notify.init({
+  width: '280px',
+  position: 'right-top', // 'right-top' - 'right-bottom' - 'left-top' - 'left-bottom' - 'center-top' - 'center-bottom' - 'center-center'
+  distance: '10px',
+  opacity: 1,
+  borderRadius: '5px',
+  rtl: false,
+  timeout: 3000,
+  messageMaxLength: 110,
+  backOverlay: false,
+  backOverlayColor: 'rgba(0,0,0,0.5)',
+  plainText: true,
+  showOnlyTheLastOne: false,
+  clickToClose: false,
+  pauseOnHover: true,
+
+  ID: 'NotiflixNotify',
+  className: 'notiflix-notify',
+  zindex: 4001,
+  fontFamily: 'Quicksand',
+  fontSize: '13px',
+  cssAnimation: true,
+  cssAnimationDuration: 400,
+  cssAnimationStyle: 'fade', // 'fade' - 'zoom' - 'from-right' - 'from-top' - 'from-bottom' - 'from-left'
+  closeButton: false,
+  useIcon: true,
+  useFontAwesome: false,
+  fontAwesomeIconStyle: 'basic', // 'basic' - 'shadow'
+  fontAwesomeIconSize: '34px',
+
+  failure: {
+    background: '#ff5549',
+    textColor: '#fff',
+    childClassName: 'notiflix-notify-failure',
+    notiflixIconColor: 'rgba(0,0,0,0.2)',
+    fontAwesomeClassName: 'fas fa-times-circle',
+    fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
+    backOverlayColor: 'rgba(255,85,73,0.2)',
+  },
+});
+
 const input = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('button');
 const timerDiv = document.querySelector('.timer');
@@ -9,9 +54,6 @@ timerDiv.style.display = 'flex';
 timerDiv.style.fontSize = '20px';
 timerDiv.style.gap = '10px';
 timerDiv.style.color = 'teal';
-
-// let timerId = null;
-// let targetDate = null;
 
 const options = {
   enableTime: true,
@@ -22,7 +64,7 @@ const options = {
     if (selectedDates[0] > new Date()) {
       startBtn.disabled = false;
     } else {
-      window.alert('Please choose a date in the future');
+      Notiflix.Notify.failure('Please choose a date in the future');
       startBtn.disabled = true;
     }
   },
@@ -57,59 +99,28 @@ function addLeadingZero(value) {
 
 function targetDateTimer() {
   const selectedDate = flatpickr('#datetime-picker').selectedDates[0];
-  const currentDate = new Date();
 
-  if (selectedDate > currentDate) {
-    let timeDifference = selectedDate.getTime() - currentDate.getTime();
+  let days = document.querySelector('[data-days]');
+  let hours = document.querySelector('[data-hours]');
+  let minutes = document.querySelector('[data-minutes]');
+  let seconds = document.querySelector('[data-seconds]');
+
+  if (selectedDate > new Date()) {
+    let delta = selectedDate - new Date();
     timerInterval = setInterval(() => {
-      const timeRemaining = convertMs(timeDifference);
+      const timeRemaining = convertMs(delta);
 
-      document.querySelector('[data-days]').textContent = addLeadingZero(
-        timeRemaining.days
-      );
-      document.querySelector('[data-hours]').textContent = addLeadingZero(
-        timeRemaining.hours
-      );
-      document.querySelector('[data-minutes]').textContent = addLeadingZero(
-        timeRemaining.minutes
-      );
-      document.querySelector('[data-seconds]').textContent = addLeadingZero(
-        timeRemaining.seconds
-      );
+      days.textContent = addLeadingZero(timeRemaining.days);
+      hours.textContent = addLeadingZero(timeRemaining.hours);
+      minutes.textContent = addLeadingZero(timeRemaining.minutes);
+      seconds.textContent = addLeadingZero(timeRemaining.seconds);
 
-      if (timeDifference <= 0) {
+      if (delta <= 0) {
         clearInterval(timerInterval);
-        document.querySelector('[data-start]').disabled = true;
+        startBtn.disabled = true;
       } else {
-        timeDifference -= 1000; // віднімання 1 секунди
+        delta -= 1000; // віднімання 1 секунди
       }
     }, 1000);
   }
 }
-
-// setInterval(() => {
-//   const delta = new Date(targetDate) - new Date();
-
-//   const seconds = Math.floor(
-//     (delta / millisecondsInSecond) % secondsInMinutes
-//   );
-//   const minutes = Math.floor(
-//     (delta / (millisecondsInSecond * secondsInMinutes)) % minutesInHour
-//   );
-//   const hours = Math.floor(
-//     (delta / (millisecondsInSecond * secondsInMinutes * minutesInHour)) %
-//       hoursInDay
-//   );
-//   const days = Math.floor(
-//     delta /
-//       (millisecondsInSecond * secondsInMinutes * minutesInHour * hoursInDay)
-//   );
-
-//   const timerFormat = `${days}d ${hours}:${minutes}:${seconds}`;
-
-//   renderTimer(timerFormat);
-// }, 1000);
-// }
-// const renderTimer = string => {
-//   document.querySelector('span').innerText = string;
-// }
