@@ -4,7 +4,7 @@ const body = document.querySelector('body');
 let colorChangeInterval;
 
 body.style.marginTop = '200px';
-body.style.marginLeft = '615px';
+body.style.textAlign = 'center';
 stopBtn.disabled = true;
 
 startBtn.addEventListener('click', () => {

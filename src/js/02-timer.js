@@ -55,6 +55,8 @@ timerDiv.style.fontSize = '20px';
 timerDiv.style.gap = '10px';
 timerDiv.style.color = 'teal';
 
+let targetDate = null;
+
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -63,6 +65,7 @@ const options = {
   onClose(selectedDates) {
     if (selectedDates[0] > new Date()) {
       startBtn.disabled = false;
+      return (targetDate = selectedDates[0]);
     } else {
       Notiflix.Notify.failure('Please choose a date in the future');
       startBtn.disabled = true;
@@ -98,15 +101,13 @@ function addLeadingZero(value) {
 }
 
 function targetDateTimer() {
-  const selectedDate = flatpickr('#datetime-picker').selectedDates[0];
-
   let days = document.querySelector('[data-days]');
   let hours = document.querySelector('[data-hours]');
   let minutes = document.querySelector('[data-minutes]');
   let seconds = document.querySelector('[data-seconds]');
 
-  if (selectedDate > new Date()) {
-    let delta = selectedDate - new Date();
+  if (targetDate > new Date()) {
+    let delta = targetDate - new Date();
     let timerInterval = setInterval(() => {
       const timeRemaining = convertMs(delta);
 
