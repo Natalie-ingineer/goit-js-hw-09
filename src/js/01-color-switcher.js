@@ -3,6 +3,10 @@ const stopBtn = document.querySelector('button[data-stop]');
 const body = document.querySelector('body');
 let colorChangeInterval;
 
+body.style.marginTop = '200px';
+body.style.marginLeft = '615px';
+stopBtn.disabled = true;
+
 startBtn.addEventListener('click', () => {
   colorChangeInterval = setInterval(() => {
     body.style.backgroundColor = getRandomHexColor();
