@@ -53,7 +53,7 @@ const timerDiv = document.querySelector('.timer');
 timerDiv.style.display = 'flex';
 timerDiv.style.fontSize = '20px';
 timerDiv.style.gap = '10px';
-timerDiv.style.color = 'teal';
+timerDiv.style.color = 'orange';
 
 let targetDate = null;
 let timerId = null;
