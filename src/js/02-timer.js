@@ -56,6 +56,7 @@ timerDiv.style.gap = '10px';
 timerDiv.style.color = 'teal';
 
 let targetDate = null;
+let timerId = null;
 
 const options = {
   enableTime: true,
@@ -108,7 +109,7 @@ function targetDateTimer() {
 
   if (targetDate > new Date()) {
     let delta = targetDate - new Date();
-    let timerInterval = setInterval(() => {
+    timerId = setInterval(() => {
       const timeRemaining = convertMs(delta);
 
       days.textContent = addLeadingZero(timeRemaining.days);
@@ -116,8 +117,10 @@ function targetDateTimer() {
       minutes.textContent = addLeadingZero(timeRemaining.minutes);
       seconds.textContent = addLeadingZero(timeRemaining.seconds);
 
-      if (delta <= 0) {
-        clearInterval(timerInterval);
+      if (new Date() >= targetDate) {
+        clearInterval(timerId);
+      } else if (delta <= 0) {
+        clearInterval(timerId);
         startBtn.disabled = true;
       } else {
         delta -= 1000; // віднімання 1 секунди
